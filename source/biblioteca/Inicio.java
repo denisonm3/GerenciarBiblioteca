@@ -26,7 +26,7 @@ public class Inicio extends javax.swing.JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(JFramePrincipal.bImage, 0, 0, this);
+        g.drawImage(JFramePrincipal.FOLHA_DIREITA, 0, 0, this);
     }
     
     /** This method is called from within the constructor to

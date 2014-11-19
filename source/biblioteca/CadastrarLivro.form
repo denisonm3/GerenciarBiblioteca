@@ -30,6 +30,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jLabelErro" max="32767" attributes="0"/>
                   <Component id="jLabelTitulo" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabelEstado" min="-2" pref="83" max="-2" attributes="0"/>
@@ -54,7 +55,6 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jTextFieldCod" min="-2" pref="144" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jLabelErro" alignment="0" min="-2" pref="245" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -73,26 +73,26 @@
                   <Component id="jLabelCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldCod" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelNome" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldNome" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelEditora" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextFieldEditora" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabelEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboBoxEstado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Component id="jButtonAddUsuario" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jLabelErro" min="-2" pref="45" max="-2" attributes="0"/>
-              <EmptySpace pref="134" max="32767" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jLabelErro" pref="75" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -143,8 +143,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddUsuarioActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabelErro">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelEditora">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -175,6 +173,8 @@
           </StringArray>
         </Property>
       </Properties>
+    </Component>
+    <Component class="biblioteca.JErroLabel" name="jLabelErro">
     </Component>
   </SubComponents>
 </Form>

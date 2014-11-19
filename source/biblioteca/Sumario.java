@@ -19,7 +19,7 @@ import java.awt.Toolkit;
  * @author denison_usuario
  */
 public class Sumario extends javax.swing.JPanel {
-    private Image bImage = Toolkit.getDefaultToolkit().getImage( getClass().getResource("imagens/folha_esquerda.jpg"));
+    private final Image bImage = Toolkit.getDefaultToolkit().getImage( getClass().getResource("imagens/folha_esquerda.jpg"));
 
     /** Creates new form Sumário */
     public Sumario() {

@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.security.auth.login.AccountException;
 import javax.swing.JOptionPane;
+import org.apache.derby.jdbc.EmbeddedDriver;
 
 /**
  *
@@ -26,57 +27,56 @@ public class ControleBanco {
 
     public ControleBanco() {
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-            //connect = DriverManager.getConnection("jdbc:derby://localhost:1527/bibliotecadb", "dbuser", "dbpassword");
-            //connect = DriverManager.getConnection("jdbc:derby:bibliotecadb", "dbuser", "dbpassword");
+            EmbeddedDriver drive = new EmbeddedDriver();
             File tmp = new File(ControleBanco.class.getProtectionDomain().getCodeSource().getLocation().getPath());
             if (!tmp.getName().endsWith(".jar")) {
                 connect = DriverManager.getConnection("jdbc:derby:bibliotecadb", "dbuser", "dbpassword");
             } else {
+                //Busca diretório do arquivo Jar
                 String bibliotecadb = tmp.getParent() + "/bibliotecadb";
                 connect = DriverManager.getConnection("jdbc:derby:" + bibliotecadb, "dbuser", "dbpassword");
             }
             /*Statement sta = connect.createStatement();
-            int count = sta.executeUpdate(
-                    "CREATE TABLE APP.EMPRESTIMO ("
-                    + " ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
-                    + " USUARIO INT NOT NULL,"
-                    + " LIVRO INT NOT NULL,"
-                    + " ENTRADA DATE,"
-                    + " ESTADO INT,"
-                    + " SAIDA DATE, PRIMARY KEY (ID))");
-            sta.close();*/
+             int count = sta.executeUpdate(
+             "CREATE TABLE APP.EMPRESTIMO ("
+             + " ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"
+             + " USUARIO INT NOT NULL,"
+             + " LIVRO INT NOT NULL,"
+             + " ENTRADA DATE,"
+             + " ESTADO INT,"
+             + " SAIDA DATE, PRIMARY KEY (ID))");
+             sta.close();*/
+            
+            //Statement sta = connect.createStatement();
+            //sta.executeUpdate("DELETE FROM APP.EMPRESTIMO");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            Logger.getLogger(ControleBanco.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Erro: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             Logger.getLogger(ControleBanco.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     public void addLivro(String codigo, String nome, String editora, Integer estado) throws SQLException {
-        Statement sta = connect.createStatement();
-        if (editora != null) {
-            sta.executeUpdate("INSERT INTO APP.LIVRO "
-                    + "(CODIGO, NOME, EDITORA, ESTADO) "
-                    + "VALUES (" + codigo + ",'" + nome + "','" + editora + "'," + estado + ")");
-        } else {
-            sta.executeUpdate("INSERT INTO APP.LIVRO "
-                    + "(CODIGO, NOME, ESTADO)"
-                    + "VALUES (" + codigo + ",'" + nome + "'," + estado + ")");
+        try (Statement sta = connect.createStatement()) {
+            if (editora != null) {
+                sta.executeUpdate("INSERT INTO APP.LIVRO "
+                        + "(CODIGO, NOME, EDITORA, ESTADO) "
+                        + "VALUES (" + codigo + ",'" + nome + "','" + editora + "'," + estado + ")");
+            } else {
+                sta.executeUpdate("INSERT INTO APP.LIVRO "
+                        + "(CODIGO, NOME, ESTADO)"
+                        + "VALUES (" + codigo + ",'" + nome + "'," + estado + ")");
+            }
         }
-        sta.close();
     }
 
     public void addUsuario(String codigo, String nome, char[] senha) throws SQLException {
-        Statement sta = connect.createStatement();
-        String pas = new String(senha);
-        sta.executeUpdate("INSERT INTO APP.USUARIO "
-                + "(CODIGO, NOME, SENHA) "
-                + "VALUES (" + codigo + ",'" + nome + "','" + pas + "')");
-        sta.close();
+        try (Statement sta = connect.createStatement()) {
+            String pas = new String(senha);
+            sta.executeUpdate("INSERT INTO APP.USUARIO "
+                    + "(CODIGO, NOME, SENHA) "
+                    + "VALUES (" + codigo + ",'" + nome + "','" + pas + "')");
+        }
     }
 
     public void fechar() {
@@ -88,20 +88,20 @@ public class ControleBanco {
     }
 
     public Object[][] getUsuario(String str) throws SQLException {
-        Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet res = sta.executeQuery("select * from APP.USUARIO WHERE (NOME LIKE '%" + str + "%')");
-        Object[][] obj = getSelectUsuario(res);
-        res.close();
-        sta.close();
+        Object[][] obj;
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet res = sta.executeQuery("select * from APP.USUARIO WHERE (NOME LIKE '%" + str + "%')")) {
+            obj = getSelectUsuario(res);
+        }
         return obj;
     }
 
     public Object[][] getUsuario(Integer integer) throws SQLException {
-        Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet res = sta.executeQuery("SELECT CODIGO, NOME, SENHA from APP.USUARIO WHERE (CODIGO = " + integer + ")");
-        Object[][] obj = getSelectUsuario(res);
-        res.close();
-        sta.close();
+        Object[][] obj;
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet res = sta.executeQuery("SELECT CODIGO, NOME, SENHA from APP.USUARIO WHERE (CODIGO = " + integer + ")")) {
+            obj = getSelectUsuario(res);
+        }
         return obj;
     }
 
@@ -121,20 +121,20 @@ public class ControleBanco {
     }
 
     public Object[][] getLivro(String text) throws SQLException {
-        Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet res = sta.executeQuery("select * from APP.LIVRO WHERE (NOME LIKE '%" + text + "%')");
-        Object[][] obj = getSelectLivro(res);
-        res.close();
-        sta.close();
+        Object[][] obj;
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet res = sta.executeQuery("select * from APP.LIVRO WHERE (NOME LIKE '%" + text + "%')")) {
+            obj = getSelectLivro(res);
+        }
         return obj;
     }
 
     public Object[][] getLivro(Integer integer) throws SQLException {
-        Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet res = sta.executeQuery("select * from APP.LIVRO WHERE (CODIGO = " + integer + ")");
-        Object[][] obj = getSelectLivro(res);
-        res.close();
-        sta.close();
+        Object[][] obj;
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); 
+                ResultSet res = sta.executeQuery("select * from APP.LIVRO WHERE (CODIGO = " + integer + ")")) {
+            obj = getSelectLivro(res);
+        }
         return obj;
     }
 
@@ -155,49 +155,50 @@ public class ControleBanco {
     }
 
     public void removeLivro(Integer codigo) throws SQLException {
-        Statement sta = connect.createStatement();
-        sta.executeUpdate("DELETE FROM APP.LIVRO WHERE (CODIGO = " + codigo + ")");
-        sta.close();
+        try (Statement sta = connect.createStatement()) {
+            sta.executeUpdate("DELETE FROM APP.LIVRO WHERE (CODIGO = " + codigo + ")");
+        }
     }
 
     public void removeUsuario(Integer codigo) throws SQLException {
-        Statement sta = connect.createStatement();
-        sta.executeUpdate("DELETE FROM APP.USUARIO WHERE (CODIGO = " + codigo + ")");
-        sta.close();
+        try (Statement sta = connect.createStatement()) {
+            sta.executeUpdate("DELETE FROM APP.USUARIO WHERE (CODIGO = " + codigo + ")");
+        }
     }
 
     public void setLivro(Integer codigo, String nome, String editora, Integer estado) throws SQLException {
-        Statement sta = connect.createStatement();
-        sta.executeUpdate("UPDATE APP.LIVRO "
-                + "SET NOME = '" + nome + "', "
-                + "EDITORA = '" + editora + "', "
-                + "ESTADO = " + estado
-                + "WHERE (CODIGO = " + codigo + ")");
-        sta.close();
+        try (Statement sta = connect.createStatement()) {
+            sta.executeUpdate("UPDATE APP.LIVRO "
+                    + "SET NOME = '" + nome + "', "
+                    + "EDITORA = '" + editora + "', "
+                    + "ESTADO = " + estado
+                    + "WHERE (CODIGO = " + codigo + ")");
+        }
     }
 
     public void setUsuario(Integer codigo, String nome, char[] senha) throws SQLException {
-        Statement sta = connect.createStatement();
-        String pas = new String(senha);
-        sta.executeUpdate("UPDATE APP.USUARIO "
-                + "SET NOME = '" + nome + "', "
-                + "SENHA = '" + pas + "' "
-                + "WHERE (CODIGO = " + codigo + ")");
-        sta.close();
+        try (Statement sta = connect.createStatement()) {
+            String pas = new String(senha);
+            sta.executeUpdate("UPDATE APP.USUARIO "
+                    + "SET NOME = '" + nome + "', "
+                    + "SENHA = '" + pas + "' "
+                    + "WHERE (CODIGO = " + codigo + ")");
+        }
     }
 
     public String validarUsuario(Integer codigo, char[] password) throws SQLException, Exception {
-        Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        String pas = new String(password);
-        ResultSet res = sta.executeQuery("SELECT NOME FROM APP.USUARIO WHERE (CODIGO = " + codigo + " AND SENHA = '"+pas+"')");
-        res.last();
-        String userName = null;
-        if(res.getRow() == 1) {
-            userName = res.getString("NOME");
+        String userName;
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+            String pas = new String(password);
+            try (ResultSet res = sta.executeQuery("SELECT NOME FROM APP.USUARIO WHERE (CODIGO = " + codigo + " AND SENHA = '" + pas + "')")) {
+                res.last();
+                userName = null;
+                if (res.getRow() == 1) {
+                    userName = res.getString("NOME");
+                }
+            }
         }
-        res.close();
-        sta.close();
-        if(userName != null) {
+        if (userName != null) {
             return userName;
         } else {
             throw new AccountException("Usuário ou senha inválido!");
@@ -205,86 +206,89 @@ public class ControleBanco {
     }
 
     public void validarLivro(Integer livroCod) throws SQLException, Exception {
-        Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet res = sta.executeQuery("select CODIGO from APP.LIVRO WHERE (CODIGO = " + livroCod + ")");
-        res.last();
-        int rowcount = res.getRow();
-        res.close();
-        if(rowcount == 0) {
+        int numeroLivro;
+        int numeroEmprestimo;
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet livro = sta.executeQuery("select CODIGO from APP.LIVRO WHERE (CODIGO = " + livroCod + ")")) {
+            livro.last();
+            numeroLivro = livro.getRow();
+        }
+        if (numeroLivro == 0) {
             throw new AccountException("Livro não encontrado!");
         }
-        res = sta.executeQuery("SELECT USUARIO FROM APP.EMPRESTIMO WHERE (LIVRO = " + livroCod + " AND ESTADO != 2)");
-        res.last();
-        rowcount = res.getRow();
-        res.close();
-        sta.close();
-        if(rowcount != 0) {
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet emprestimo = sta.executeQuery("SELECT ID FROM APP.EMPRESTIMO WHERE (LIVRO = " + livroCod + " AND ESTADO != 2)")) {
+            emprestimo.last();
+            numeroEmprestimo = emprestimo.getRow();
+        }
+        System.out.println(numeroLivro+" - "+numeroEmprestimo);
+        if (numeroEmprestimo != 0) {
             throw new AccountException("Livro indisponível!");
         }
     }
 
     public void setUsuario(Integer codigo, String nome) throws SQLException {
-        Statement sta = connect.createStatement();
-        sta.executeUpdate("UPDATE APP.USUARIO "
-                + "SET NOME = '" + nome + "' "
-                + "WHERE (CODIGO = " + codigo + ")");
-        sta.close();
+        try (Statement sta = connect.createStatement()) {
+            sta.executeUpdate("UPDATE APP.USUARIO "
+                    + "SET NOME = '" + nome + "' "
+                    + "WHERE (CODIGO = " + codigo + ")");
+        }
     }
 
     public Object[][] getEmprestimoAberto(int userCod) throws SQLException {
-        Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet res = sta.executeQuery("SELECT * FROM APP.EMPRESTIMO WHERE (USUARIO = " + userCod + " AND ESTADO != 2)");
-        res.last();
-        int rowcount = res.getRow();
-        res.beforeFirst();
-        Object[][] obj = new Object[rowcount][4];
-        int i = 0;
-        while (res.next()) {
-            obj[i][0] = res.getInt("ID");
-            obj[i][1] = res.getInt("LIVRO");
-            obj[i][2] = res.getString("ENTRADA");
-            obj[i][3] = res.getInt("ESTADO");
-            i++;
+        Object[][] obj;
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                ResultSet res = sta.executeQuery("SELECT * FROM APP.EMPRESTIMO WHERE (USUARIO = " + userCod + " AND ESTADO != 2)")) {
+            res.last();
+            int rowcount = res.getRow();
+            res.beforeFirst();
+            obj = new Object[rowcount][4];
+            int i = 0;
+            while (res.next()) {
+                obj[i][0] = res.getInt("ID");
+                obj[i][1] = res.getInt("LIVRO");
+                obj[i][2] = res.getString("ENTRADA");
+                obj[i][3] = res.getInt("ESTADO");
+                i++;
+            }
         }
-        res.close();
-        sta.close();
         return obj;
     }
 
     public void addEmprestimo(Integer userCod, Integer livroCod, Date date) throws SQLException {
-        Statement sta = connect.createStatement();
-        sta.executeUpdate("INSERT INTO APP.EMPRESTIMO "
-                + "(USUARIO, LIVRO, ENTRADA, ESTADO) "
-                + "VALUES (" + userCod + "," + livroCod + ",'" + date + "',0)");
-        sta.close();
+        try (Statement sta = connect.createStatement()) {
+            sta.executeUpdate("INSERT INTO APP.EMPRESTIMO "
+                    + "(USUARIO, LIVRO, ENTRADA, ESTADO) "
+                    + "VALUES (" + userCod + "," + livroCod + ",'" + date + "',0)");
+        }
     }
 
     public void setEmprestimoDevolver(Integer codigo, int estado, Date date) throws SQLException {
-        Statement sta = connect.createStatement();
-        sta.executeUpdate("UPDATE APP.EMPRESTIMO "
-                + "SET SAIDA = '" + date + "', "
-                + "ESTADO = " + estado + " "
-                + "WHERE (ID = " + codigo + ")");
-        sta.close();
+        try (Statement sta = connect.createStatement()) {
+            sta.executeUpdate("UPDATE APP.EMPRESTIMO "
+                    + "SET SAIDA = '" + date + "', "
+                    + "ESTADO = " + estado + " "
+                    + "WHERE (ID = " + codigo + ")");
+        }
     }
 
     public Object[][] getEmprestimo(Integer userCod) throws SQLException {
-        Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-        ResultSet res = sta.executeQuery("SELECT * FROM APP.EMPRESTIMO WHERE (USUARIO = " + userCod + ")");
-        res.last();
-        int rowcount = res.getRow();
-        res.beforeFirst();
-        Object[][] obj = new Object[rowcount][4];
-        int i = 0;
-        while (res.next()) {
-            obj[i][0] = res.getInt("LIVRO");
-            obj[i][1] = res.getString("ENTRADA");
-            obj[i][2] = res.getString("SAIDA");
-            obj[i][3] = res.getInt("ESTADO");
-            i++;
+        Object[][] obj;
+        try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY); 
+                ResultSet res = sta.executeQuery("SELECT * FROM APP.EMPRESTIMO WHERE (USUARIO = " + userCod + ")")) {
+            res.last();
+            int rowcount = res.getRow();
+            res.beforeFirst();
+            obj = new Object[rowcount][4];
+            int i = 0;
+            while (res.next()) {
+                obj[i][0] = res.getInt("LIVRO");
+                obj[i][1] = res.getString("ENTRADA");
+                obj[i][2] = res.getString("SAIDA");
+                obj[i][3] = res.getInt("ESTADO");
+                i++;
+            }
         }
-        res.close();
-        sta.close();
         return obj;
     }
 }

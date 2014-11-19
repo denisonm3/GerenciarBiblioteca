@@ -35,7 +35,7 @@ public class CadastrarLivro extends javax.swing.JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(JFramePrincipal.bImage, 0, 0, this);
+        g.drawImage(JFramePrincipal.FOLHA_DIREITA, 0, 0, this);
     }
     
     /** This method is called from within the constructor to
@@ -53,11 +53,11 @@ public class CadastrarLivro extends javax.swing.JPanel {
         jTextFieldCod = new javax.swing.JFormattedTextField();
         jTextFieldNome = new javax.swing.JTextField();
         jButtonAddUsuario = new javax.swing.JButton();
-        jLabelErro = new javax.swing.JLabel();
         jLabelEditora = new javax.swing.JLabel();
         jTextFieldEditora = new javax.swing.JTextField();
         jLabelEstado = new javax.swing.JLabel();
         jComboBoxEstado = new javax.swing.JComboBox();
+        jLabelErro = new biblioteca.JErroLabel();
 
         setMaximumSize(new java.awt.Dimension(351, 535));
         setMinimumSize(new java.awt.Dimension(351, 535));
@@ -98,6 +98,7 @@ public class CadastrarLivro extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelErro)
                     .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,8 +118,7 @@ public class CadastrarLivro extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabelCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabelErro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTextFieldCod, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(64, 64, 64))
         );
@@ -145,23 +145,20 @@ public class CadastrarLivro extends javax.swing.JPanel {
                     .addComponent(jComboBoxEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonAddUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelErro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelErro, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addGap(116, 116, 116))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUsuarioActionPerformed
         // TODO add your handling code here:
         if(jTextFieldCod.getText() == null || jTextFieldCod.getText().equals("")){
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("O Código deve ser infomado!");
+            jLabelErro.setErroText("O Código deve ser infomado!");
         }else if(jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")){
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("O Nome deve ser infomado!");
+            jLabelErro.setErroText("O Nome deve ser infomado!");
         }else if(jTextFieldCod.getText().contains("-")){
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("O Código deve ser positivo!");
+            jLabelErro.setErroText("O Código deve ser positivo!");
         }else{
             try {
                 if(jTextFieldEditora.getText().equals(""))
@@ -171,8 +168,7 @@ public class CadastrarLivro extends javax.swing.JPanel {
                 jLabelErro.setForeground(Color.GREEN);
                 jLabelErro.setText("Livro "+jTextFieldNome.getText()+" adicionado com sucesso!");
             } catch (SQLException ex) {
-                jLabelErro.setForeground(Color.RED);
-                jLabelErro.setText(ex.getMessage());
+                jLabelErro.setErroText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonAddUsuarioActionPerformed
@@ -182,7 +178,7 @@ public class CadastrarLivro extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBoxEstado;
     private javax.swing.JLabel jLabelCodigo;
     private javax.swing.JLabel jLabelEditora;
-    private javax.swing.JLabel jLabelErro;
+    private biblioteca.JErroLabel jLabelErro;
     private javax.swing.JLabel jLabelEstado;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelTitulo;

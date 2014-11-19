@@ -8,7 +8,6 @@ import biblioteca.db.ControleBanco;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.sql.Date;
-import java.sql.SQLException;
 
 /**
  *
@@ -35,7 +34,7 @@ public class Emprestimo extends javax.swing.JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(JFramePrincipal.bImage, 0, 0, this);
+        g.drawImage(JFramePrincipal.FOLHA_DIREITA, 0, 0, this);
     }
 
     /**
@@ -50,7 +49,6 @@ public class Emprestimo extends javax.swing.JPanel {
         jLabelTitulo = new javax.swing.JLabel();
         jTextFieldNome = new javax.swing.JTextField();
         jLabelNome = new javax.swing.JLabel();
-        jLabelErro = new javax.swing.JLabel();
         jTextFieldSenha = new javax.swing.JPasswordField();
         jLabelSenha = new javax.swing.JLabel();
         jButtonValidar = new javax.swing.JButton();
@@ -60,6 +58,7 @@ public class Emprestimo extends javax.swing.JPanel {
         jButtonEmprestar = new javax.swing.JButton();
         jLabelUserName = new javax.swing.JLabel();
         jButtonVoltar = new javax.swing.JButton();
+        jLabelErro = new biblioteca.JErroLabel();
 
         setMaximumSize(new java.awt.Dimension(351, 535));
         setMinimumSize(new java.awt.Dimension(351, 535));
@@ -105,23 +104,15 @@ public class Emprestimo extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelErro, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelCodLivro, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldCodLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButtonValidar, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEmprestar, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelErro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonValidar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonEmprestar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -131,7 +122,15 @@ public class Emprestimo extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabelSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jTextFieldSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelCodLivro, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldCodLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
@@ -162,18 +161,16 @@ public class Emprestimo extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addComponent(jButtonVoltar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelErro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addComponent(jLabelErro, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         if(jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")){
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("O Nome deve ser infomado!");
+            jLabelErro.setErroText("O Nome deve ser infomado!");
         }else if(jTextFieldSenha.getPassword().length < 4){
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("Senha deve ter 4 ou mais caractes!");
+            jLabelErro.setErroText("Senha deve ter 4 ou mais caractes!");
         }else{
             try {
                 userCod = Integer.valueOf(jTextFieldNome.getText());
@@ -186,13 +183,8 @@ public class Emprestimo extends javax.swing.JPanel {
                     jLabelErro.setText("");
                 }
                 inserirLivro();
-            } catch (SQLException ex) {
-                jLabelErro.setForeground(Color.RED);
-                jLabelErro.setText(ex.getMessage());
-                System.err.println(ex.getMessage());
             } catch (Exception ex) {
-                jLabelErro.setForeground(Color.RED);
-                jLabelErro.setText(ex.getMessage());
+                jLabelErro.setErroText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
@@ -204,8 +196,7 @@ public class Emprestimo extends javax.swing.JPanel {
 
     private void jButtonEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmprestarActionPerformed
         if(jTextFieldCodLivro.getText() == null || jTextFieldCodLivro.getText().equals("")){
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("O Código deve ser infomado!");
+            jLabelErro.setErroText("O Código deve ser infomado!");
         }else{
             try {
                 livroCod = Integer.valueOf(jTextFieldCodLivro.getText());
@@ -213,13 +204,8 @@ public class Emprestimo extends javax.swing.JPanel {
                 banco.addEmprestimo(userCod,livroCod,new Date(System.currentTimeMillis()));
                 jLabelErro.setForeground(Color.GREEN);
                 jLabelErro.setText("Emprestimo realizado com sucesso!");
-            } catch (SQLException ex) {
-                jLabelErro.setForeground(Color.RED);
-                jLabelErro.setText(ex.getMessage());
-                System.err.println(ex.getMessage());
             } catch (Exception ex) {
-                jLabelErro.setForeground(Color.RED);
-                jLabelErro.setText(ex.getMessage());
+                jLabelErro.setErroText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonEmprestarActionPerformed
@@ -229,7 +215,7 @@ public class Emprestimo extends javax.swing.JPanel {
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabelCodLivro;
-    private javax.swing.JLabel jLabelErro;
+    private biblioteca.JErroLabel jLabelErro;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelTitulo;

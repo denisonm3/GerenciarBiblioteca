@@ -4,6 +4,9 @@
  */
 package biblioteca;
 
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author denison_usuario
@@ -14,9 +17,19 @@ public class Biblioteca {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        JFramePrincipal jj = new JFramePrincipal();
-        jj.setLocationRelativeTo(null);
-        jj.setVisible(true);
+        ImageIcon icon = new ImageIcon(
+                Toolkit.getDefaultToolkit().getImage(Biblioteca.class.getResource("imagens/livro.png"))
+        );
+        SplashWindow sw = new SplashWindow(icon);
+        sw.setVisible(true);
+        sw.setText("Copyright (c) 2012 Denison");
+        try {
+            JFramePrincipal jj = new JFramePrincipal();
+            jj.setLocationRelativeTo(null);
+            sw.setVisible(false);
+            jj.setVisible(true);
+        } catch (Exception e) {
+            sw.setVisible(false);
+        }
     }
 }

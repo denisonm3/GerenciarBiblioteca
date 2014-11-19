@@ -7,6 +7,7 @@ package biblioteca;
 import biblioteca.db.ControleBanco;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.sql.SQLException;
 import javax.security.auth.login.AccountException;
 import javax.swing.table.DefaultTableModel;
 
@@ -33,7 +34,7 @@ public class Historico extends javax.swing.JPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(JFramePrincipal.bImage, 0, 0, this);
+        g.drawImage(JFramePrincipal.FOLHA_DIREITA, 0, 0, this);
     }
 
     /**
@@ -52,9 +53,9 @@ public class Historico extends javax.swing.JPanel {
         jLabelTitulo = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jLabelErro = new javax.swing.JLabel();
         jLabelUsuario = new javax.swing.JLabel();
         jLabelUserName = new javax.swing.JLabel();
+        jLabelErro = new biblioteca.JErroLabel();
 
         setMaximumSize(new java.awt.Dimension(351, 535));
         setMinimumSize(new java.awt.Dimension(351, 535));
@@ -62,6 +63,8 @@ public class Historico extends javax.swing.JPanel {
 
         jLabelCodigo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jLabelCodigo.setText("Código:");
+
+        jTextFieldCod.setPreferredSize(new java.awt.Dimension(160, 20));
 
         jButtonBusca.setText("Buscar");
         jButtonBusca.addActionListener(new java.awt.event.ActionListener() {
@@ -125,16 +128,16 @@ public class Historico extends javax.swing.JPanel {
                         .addComponent(jLabelUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabelUserName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabelErro, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCod))
+                        .addComponent(jTextFieldCod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jLabelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonBusca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                    .addComponent(jButtonBusca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonVoltar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabelErro))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,15 +159,14 @@ public class Historico extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabelErro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(jLabelErro, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaActionPerformed
         if (jTextFieldCod.getText() == null || jTextFieldCod.getText().equals("")) {
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("O Código deve ser infomado!");
+            jLabelErro.setErroText("O Código deve ser infomado!");
         } else {
             try {
                 Integer userCod = Integer.parseInt(jTextFieldCod.getText());
@@ -179,21 +181,20 @@ public class Historico extends javax.swing.JPanel {
                     throw new AccountException("Histórico vazio!");
                 }
                 model.setNumRows(0);
-                for (int i = 0; i < table.length; i++) {
-                    if ((Integer) table[i][3] == 0) {
-                        table[i][3] = "Aberto";
-                    } else if ((Integer) table[i][3] == 1) {
-                        table[i][3] = "Pendente";
-                    } else if ((Integer) table[i][3] == 2) {
-                        table[i][3] = "Concluído";
+                for (Object[] table1 : table) {
+                    if ((Integer) table1[3] == 0) {
+                        table1[3] = "Aberto";
+                    } else if ((Integer) table1[3] == 1) {
+                        table1[3] = "Pendente";
+                    } else if ((Integer) table1[3] == 2) {
+                        table1[3] = "Concluído";
                     }
-                    model.addRow(table[i]);
+                    model.addRow(table1);
                 }
                 jLabelErro.setText("");
                 apresentarBusca(false);
-            } catch (Exception ex) {
-                jLabelErro.setForeground(Color.RED);
-                jLabelErro.setText(ex.getMessage());
+            } catch (NumberFormatException | SQLException | AccountException ex) {
+                jLabelErro.setErroText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonBuscaActionPerformed
@@ -206,7 +207,7 @@ public class Historico extends javax.swing.JPanel {
     private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabelCodigo;
-    private javax.swing.JLabel jLabelErro;
+    private biblioteca.JErroLabel jLabelErro;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelUserName;
     private javax.swing.JLabel jLabelUsuario;
