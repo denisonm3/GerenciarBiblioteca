@@ -15,6 +15,7 @@
  */
 package biblioteca.gui.folha;
 
+import static biblioteca.Biblioteca.WORDS;
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
 import java.awt.Graphics;
@@ -76,15 +77,15 @@ public class Emprestimo extends javax.swing.JPanel {
 
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Emprestimo");
+        jLabelTitulo.setText(WORDS.getString("EMPRESTIMO")); // NOI18N
 
         jLabelNome.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelNome.setText("Código:");
+        jLabelNome.setText(WORDS.getString("CODIGO")); // NOI18N
 
         jLabelSenha.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelSenha.setText("Senha:");
+        jLabelSenha.setText(WORDS.getString("SENHA")); // NOI18N
 
-        jButtonValidar.setText("Validar Usuário");
+        jButtonValidar.setText(WORDS.getString("VALIDAR-USUARIO")); // NOI18N
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonValidarActionPerformed(evt);
@@ -92,19 +93,19 @@ public class Emprestimo extends javax.swing.JPanel {
         });
 
         jLabelCodLivro.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelCodLivro.setText("Código do Livro");
+        jLabelCodLivro.setText(WORDS.getString("CODIGO-LIVRO")); // NOI18N
 
         jLabelUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelUsuario.setText("Usuário");
+        jLabelUsuario.setText(WORDS.getString("USUARIO")); // NOI18N
 
-        jButtonEmprestar.setText("Realizar Emprestimo");
+        jButtonEmprestar.setText(WORDS.getString("REALIZAR-EMPRESTIMO")); // NOI18N
         jButtonEmprestar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEmprestarActionPerformed(evt);
             }
         });
 
-        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setText(WORDS.getString("VOLTAR")); // NOI18N
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVoltarActionPerformed(evt);
@@ -127,7 +128,7 @@ public class Emprestimo extends javax.swing.JPanel {
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -179,16 +180,16 @@ public class Emprestimo extends javax.swing.JPanel {
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         if(jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")){
-            jLabelErro.setErrorText("O Nome deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-NOME"));
         }else if(jTextFieldSenha.getPassword().length < 4){
-            jLabelErro.setErrorText("Senha deve ter 4 ou mais caractes!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-SENHA"));
         }else{
             try {
                 userCod = Integer.valueOf(jTextFieldNome.getText());
                 userName = banco.validarUsuario(userCod, jTextFieldSenha.getPassword());
                 int abertos = banco.getEmprestimoAberto(userCod).length;
                 if(abertos > 0) {
-                    jLabelErro.setWarningText("Usuário está com "+abertos+" livros.");
+                    jLabelErro.setWarningText(WORDS.getString("USUARIO-ESTA")+abertos+WORDS.getString("LIVRO "));
                 } else {
                     jLabelErro.setText("");
                 }
@@ -206,13 +207,13 @@ public class Emprestimo extends javax.swing.JPanel {
 
     private void jButtonEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmprestarActionPerformed
         if(jTextFieldCodLivro.getText() == null || jTextFieldCodLivro.getText().equals("")){
-            jLabelErro.setErrorText("O Código deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-CODIGO"));
         }else{
             try {
                 livroCod = Integer.valueOf(jTextFieldCodLivro.getText());
                 banco.validarLivro(livroCod);
                 banco.addEmprestimo(userCod,livroCod,new Date(System.currentTimeMillis()));
-                jLabelErro.setSuccessText("Emprestimo realizado com sucesso!");
+                jLabelErro.setSuccessText(WORDS.getString("MSG-EMPRESTIMO"));
             } catch (Exception ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             }

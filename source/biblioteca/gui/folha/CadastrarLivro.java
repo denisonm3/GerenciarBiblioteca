@@ -20,6 +20,7 @@
  */
 package biblioteca.gui.folha;
 
+import static biblioteca.Biblioteca.WORDS;
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
 import java.awt.Graphics;
@@ -75,18 +76,18 @@ public class CadastrarLivro extends javax.swing.JPanel {
 
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Cadastrar Livro");
+        jLabelTitulo.setText(WORDS.getString("CADASTRAR-LIVRO")); // NOI18N
 
         jLabelCodigo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelCodigo.setText("Código:");
+        jLabelCodigo.setText(WORDS.getString("CODIGO")); // NOI18N
 
         jLabelNome.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelNome.setText("Nome:");
+        jLabelNome.setText(WORDS.getString("NOME")); // NOI18N
 
         jTextFieldCod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jButtonAddUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/gui/imagens/icon_livro.png"))); // NOI18N
-        jButtonAddUsuario.setText("Adicionar Livro");
+        jButtonAddUsuario.setText(WORDS.getString("ADICIONAR-LIVRO")); // NOI18N
         jButtonAddUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddUsuarioActionPerformed(evt);
@@ -94,10 +95,10 @@ public class CadastrarLivro extends javax.swing.JPanel {
         });
 
         jLabelEditora.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelEditora.setText("Editora:");
+        jLabelEditora.setText(WORDS.getString("EDITORA")); // NOI18N
 
         jLabelEstado.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelEstado.setText("Estado:");
+        jLabelEstado.setText(WORDS.getString("ESTADO")); // NOI18N
 
         jComboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Novo", "Bem conservado", "Pouco desgastados", "Perdido", "Danificado" }));
 
@@ -164,18 +165,18 @@ public class CadastrarLivro extends javax.swing.JPanel {
     private void jButtonAddUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUsuarioActionPerformed
         // TODO add your handling code here:
         if(jTextFieldCod.getText() == null || jTextFieldCod.getText().equals("")){
-            jLabelErro.setErrorText("O Código deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-CODIGO"));
         }else if(jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")){
-            jLabelErro.setErrorText("O Nome deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-NOME"));
         }else if(jTextFieldCod.getText().contains("-")){
-            jLabelErro.setErrorText("O Código deve ser positivo!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-POSITIVO"));
         }else{
             try {
                 if(jTextFieldEditora.getText().equals(""))
                     banco.addLivro(jTextFieldCod.getText(), jTextFieldNome.getText(), null, jComboBoxEstado.getSelectedIndex() + 1);
                 else
                     banco.addLivro(jTextFieldCod.getText(), jTextFieldNome.getText(), jTextFieldEditora.getText(), jComboBoxEstado.getSelectedIndex() + 1);
-                jLabelErro.setSuccessText("Livro "+jTextFieldNome.getText()+" adicionado com sucesso!");
+                jLabelErro.setSuccessText(WORDS.getString("LIVRO ")+jTextFieldNome.getText()+WORDS.getString("MSG-ADICIONADO"));
             } catch (SQLException ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             }

@@ -15,6 +15,7 @@
  */
 package biblioteca.gui.folha;
 
+import static biblioteca.Biblioteca.WORDS;
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
 import java.awt.Graphics;
@@ -78,9 +79,9 @@ public class Devolucao extends javax.swing.JPanel {
 
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Devolução");
+        jLabelTitulo.setText(WORDS.getString("DEVOLUCAO")); // NOI18N
 
-        jButtonValidar.setText("Validar Usuário");
+        jButtonValidar.setText(WORDS.getString("VALIDAR-USUARIO")); // NOI18N
         jButtonValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonValidarActionPerformed(evt);
@@ -123,26 +124,26 @@ public class Devolucao extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jLabelSenha.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelSenha.setText("Senha:");
+        jLabelSenha.setText(WORDS.getString("SENHA")); // NOI18N
 
         jLabelNome.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelNome.setText("Código:");
+        jLabelNome.setText(WORDS.getString("CODIGO")); // NOI18N
 
-        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setText(WORDS.getString("VOLTAR")); // NOI18N
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVoltarActionPerformed(evt);
             }
         });
 
-        jButtonPendente.setText("Pendente");
+        jButtonPendente.setText(WORDS.getString("PENDENTE")); // NOI18N
         jButtonPendente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPendenteActionPerformed(evt);
             }
         });
 
-        jButtonDevolver.setText("Devolver");
+        jButtonDevolver.setText(WORDS.getString("DEVOLVER")); // NOI18N
         jButtonDevolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonDevolverActionPerformed(evt);
@@ -150,7 +151,7 @@ public class Devolucao extends javax.swing.JPanel {
         });
 
         jLabelUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelUsuario.setText("Usuário");
+        jLabelUsuario.setText(WORDS.getString("USUARIO")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -220,9 +221,9 @@ public class Devolucao extends javax.swing.JPanel {
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         if (jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")) {
-            jLabelErro.setErrorText("O Código deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-CODIGO"));
         } else if (jTextFieldSenha.getPassword().length < 4) {
-            jLabelErro.setErrorText("Senha deve ter 4 ou mais caractes!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-SENHA"));
         } else {
             try {
                 Integer cod = Integer.valueOf(jTextFieldNome.getText());
@@ -234,16 +235,16 @@ public class Devolucao extends javax.swing.JPanel {
                     model.setNumRows(0);
                     for (Object[] table1 : table) {
                         if ((Integer) table1[3] == 0) {
-                            table1[3] = "Aberto";
+                            table1[3] = WORDS.getString("ABERTO");
                         } else if ((Integer) table1[3] == 1) {
-                            table1[3] = "Pendente";
+                            table1[3] = WORDS.getString("PENDENTE");
                         }
                         model.addRow(table1);
                     }
                     jLabelErro.setText("");
                     inserirUsuario(false);
                 } else {
-                    jLabelErro.setErrorText("Sem emprestimos pendentes!");
+                    jLabelErro.setErrorText(WORDS.getString("ERRO-SEM-EMPRESTIMOS"));
                 }
             } catch (Exception ex) {
                 jLabelErro.setErrorText(ex.getMessage());
@@ -262,7 +263,7 @@ public class Devolucao extends javax.swing.JPanel {
             Integer cod = (Integer) jTable1.getValueAt(linha, 0);
             try {
                 banco.setEmprestimoDevolver(cod, 2, new Date(System.currentTimeMillis()));
-                jLabelErro.setSuccessText("Devolução efetuada com sucesso.");
+                jLabelErro.setSuccessText(WORDS.getString("MSG-DEVOLUCAO"));
             } catch (SQLException ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             }
@@ -271,7 +272,7 @@ public class Devolucao extends javax.swing.JPanel {
                 inserirUsuario(true);
             }
         } else {
-            jLabelErro.setErrorText("Selecione uma linha!");
+            jLabelErro.setErrorText(WORDS.getString("SELECIONE-LINHA"));
         }
     }//GEN-LAST:event_jButtonDevolverActionPerformed
 
@@ -281,13 +282,13 @@ public class Devolucao extends javax.swing.JPanel {
             Integer cod = (Integer) jTable1.getValueAt(linha, 0);
             try {
                 banco.setEmprestimoDevolver(cod, 1, new Date(System.currentTimeMillis()));
-                jTable1.setValueAt("Pendente", linha, 3);
-                jLabelErro.setSuccessText("Devolução marcada com pendência.");
+                jTable1.setValueAt(WORDS.getString("PENDENTE"), linha, 3);
+                jLabelErro.setSuccessText(WORDS.getString("MSG-DEVOLUCAO-COM-PENDENCIA"));
             } catch (SQLException ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             }
         } else {
-            jLabelErro.setErrorText("Selecione uma linha!");
+            jLabelErro.setErrorText(WORDS.getString("SELECIONE-LINHA"));
         }
     }//GEN-LAST:event_jButtonPendenteActionPerformed
 

@@ -15,6 +15,7 @@
  */
 package biblioteca.gui.folha;
 
+import static biblioteca.Biblioteca.WORDS;
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
 import java.awt.Graphics;
@@ -73,18 +74,18 @@ public class Historico extends javax.swing.JPanel {
         setName(""); // NOI18N
 
         jLabelCodigo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelCodigo.setText("Código:");
+        jLabelCodigo.setText(WORDS.getString("CODIGO")); // NOI18N
 
         jTextFieldCod.setPreferredSize(new java.awt.Dimension(160, 20));
 
-        jButtonBusca.setText("Buscar");
+        jButtonBusca.setText(WORDS.getString("BUSCAR")); // NOI18N
         jButtonBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscaActionPerformed(evt);
             }
         });
 
-        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setText(WORDS.getString("VOLTAR")); // NOI18N
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVoltarActionPerformed(evt);
@@ -93,7 +94,7 @@ public class Historico extends javax.swing.JPanel {
 
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Histórico");
+        jLabelTitulo.setText(WORDS.getString("HISTORICO")); // NOI18N
 
         jTable1.setBackground(new java.awt.Color(255, 253, 238));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -126,7 +127,7 @@ public class Historico extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         jLabelUsuario.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabelUsuario.setText("Usuário");
+        jLabelUsuario.setText(WORDS.getString("USUARIO")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -177,28 +178,28 @@ public class Historico extends javax.swing.JPanel {
 
     private void jButtonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaActionPerformed
         if (jTextFieldCod.getText() == null || jTextFieldCod.getText().equals("")) {
-            jLabelErro.setErrorText("O Código deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-CODIGO"));
         } else {
             try {
                 Integer userCod = Integer.parseInt(jTextFieldCod.getText());
                 Object[][] table = banco.getUsuario(userCod);
                 if (table.length != 1) {
-                    throw new AccountException("Usuário não encontrado!");
+                    throw new AccountException(WORDS.getString("ERRO-USUARIO-NAO-ENCONTRADO!"));
                 }
                 jLabelUserName.setText(table[0][1].toString());
                 table = banco.getEmprestimo(userCod);
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 if (table.length == 0) {
-                    throw new AccountException("Histórico vazio!");
+                    throw new AccountException(WORDS.getString("HISTORICO-VAZIO"));
                 }
                 model.setNumRows(0);
                 for (Object[] table1 : table) {
                     if ((Integer) table1[3] == 0) {
-                        table1[3] = "Aberto";
+                        table1[3] = WORDS.getString("ABERTO");
                     } else if ((Integer) table1[3] == 1) {
-                        table1[3] = "Pendente";
+                        table1[3] = WORDS.getString("PENDENTE");
                     } else if ((Integer) table1[3] == 2) {
-                        table1[3] = "Concluído";
+                        table1[3] = WORDS.getString("CONCLUIDO");
                     }
                     model.addRow(table1);
                 }

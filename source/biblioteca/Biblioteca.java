@@ -18,6 +18,8 @@ package biblioteca;
 import biblioteca.gui.JFramePrincipal;
 import biblioteca.gui.SplashWindow;
 import java.awt.Toolkit;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.ImageIcon;
 
 /**
@@ -26,17 +28,21 @@ import javax.swing.ImageIcon;
  */
 public class Biblioteca {
 
+    public static ResourceBundle WORDS;
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         ImageIcon icon = new ImageIcon(
-                Toolkit.getDefaultToolkit().getImage(Biblioteca.class.getResource("imagens/livro.png"))
+                Toolkit.getDefaultToolkit().getImage(Biblioteca.class.getResource("gui/imagens/livro.png"))
         );
         SplashWindow sw = new SplashWindow(icon);
         sw.setVisible(true);
         sw.setText("Copyright (c) 2012 Denison");
         try {
+            Locale locale = Locale.getDefault();
+            WORDS = ResourceBundle.getBundle("biblioteca.idioma.Idioma", locale);
             JFramePrincipal jj = new JFramePrincipal();
             jj.setLocationRelativeTo(null);
             sw.setVisible(false);

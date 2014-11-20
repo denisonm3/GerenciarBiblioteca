@@ -15,6 +15,7 @@
  */
 package biblioteca.db;
 
+import static biblioteca.Biblioteca.WORDS;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.Date;
@@ -212,7 +213,7 @@ public class ControleBanco {
         if (userName != null) {
             return userName;
         } else {
-            throw new AccountException("Usuário ou senha inválido!");
+            throw new AccountException(WORDS.getString("ERRO-USUARIO"));
         }
     }
 
@@ -225,7 +226,7 @@ public class ControleBanco {
             numeroLivro = livro.getRow();
         }
         if (numeroLivro == 0) {
-            throw new AccountException("Livro não encontrado!");
+            throw new AccountException(WORDS.getString("ERRO-LIVRO"));
         }
         try (Statement sta = connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 ResultSet emprestimo = sta.executeQuery("SELECT ID FROM APP.EMPRESTIMO WHERE (LIVRO = " + livroCod + " AND ESTADO != 2)")) {
@@ -234,7 +235,7 @@ public class ControleBanco {
         }
         System.out.println(numeroLivro+" - "+numeroEmprestimo);
         if (numeroEmprestimo != 0) {
-            throw new AccountException("Livro indisponível!");
+            throw new AccountException(WORDS.getString("ERRO-LIVRO-INDISPONIVEL"));
         }
     }
 

@@ -20,6 +20,7 @@
  */
 package biblioteca.gui.folha;
 
+import static biblioteca.Biblioteca.WORDS;
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
 import java.awt.Graphics;
@@ -73,18 +74,18 @@ public class CadastrarUsuario extends javax.swing.JPanel {
 
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Cadastrar Usuário");
+        jLabelTitulo.setText(WORDS.getString("CADASTRAR-USUARIO")); // NOI18N
 
         jLabelCodigo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelCodigo.setText("Código:");
+        jLabelCodigo.setText(WORDS.getString("CODIGO")); // NOI18N
 
         jLabelNome.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelNome.setText("Nome:");
+        jLabelNome.setText(WORDS.getString("NOME")); // NOI18N
 
         jTextFieldCod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
         jButtonAddUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/gui/imagens/novo_usuario.png"))); // NOI18N
-        jButtonAddUsuario.setText("Adicionar Usuário");
+        jButtonAddUsuario.setText(WORDS.getString("ADICIONAR-USUARIO")); // NOI18N
         jButtonAddUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddUsuarioActionPerformed(evt);
@@ -92,7 +93,7 @@ public class CadastrarUsuario extends javax.swing.JPanel {
         });
 
         jLabelSenha.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelSenha.setText("Senha:");
+        jLabelSenha.setText(WORDS.getString("SENHA")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,17 +147,17 @@ public class CadastrarUsuario extends javax.swing.JPanel {
     private void jButtonAddUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUsuarioActionPerformed
         // TODO add your handling code here:
         if(jTextFieldCod.getText() == null || jTextFieldCod.getText().equals("")){
-            jLabelErro.setErrorText("O Código deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-CODIGO"));
         }else if(jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")){
-            jLabelErro.setErrorText("O Nome deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-NOME"));
         }else if(jTextFieldCod.getText().contains("-")){
-            jLabelErro.setErrorText("O Código deve ser positivo!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-POSITIVO"));
         }else if(jTextFieldSenha.getPassword().length < 4){
-            jLabelErro.setErrorText("Senha deve ter 4 ou mais caractes!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-SENHA"));
         }else{
             try {
                 banco.addUsuario(jTextFieldCod.getText(), jTextFieldNome.getText(), jTextFieldSenha.getPassword());
-                jLabelErro.setSuccessText("Usuario "+jTextFieldNome.getText()+" adicionado com sucesso!");
+                jLabelErro.setSuccessText(WORDS.getString("USUARIO")+jTextFieldNome.getText()+WORDS.getString("MSG-ADICIONADO"));
             } catch (SQLException ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             }

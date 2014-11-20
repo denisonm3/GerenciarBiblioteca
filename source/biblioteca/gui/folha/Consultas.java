@@ -20,6 +20,7 @@
  */
 package biblioteca.gui.folha;
 
+import static biblioteca.Biblioteca.WORDS;
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
 import java.awt.Component;
@@ -36,6 +37,7 @@ import javax.swing.table.TableCellRenderer;
 
 /**
  * Interface de busca e apresentação dos usuários e livros do banco de dados
+ *
  * @author Denison
  */
 public class Consultas extends javax.swing.JPanel {
@@ -176,12 +178,12 @@ public class Consultas extends javax.swing.JPanel {
 
         jLabelTitulo.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelTitulo.setText("Consultas");
+        jLabelTitulo.setText(WORDS.getString("CONSULTAS")); // NOI18N
 
         jLabelCodigo.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabelCodigo.setText("Código:");
+        jLabelCodigo.setText(WORDS.getString("CODIGO")); // NOI18N
 
-        jButtonBusca.setText("Buscar");
+        jButtonBusca.setText(WORDS.getString("BUSCAR")); // NOI18N
         jButtonBusca.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscaActionPerformed(evt);
@@ -190,7 +192,7 @@ public class Consultas extends javax.swing.JPanel {
 
         jRadioButtonUsuario.setBackground(new java.awt.Color(255, 253, 238));
         jRadioButtonUsuario.setSelected(true);
-        jRadioButtonUsuario.setText("Usuário");
+        jRadioButtonUsuario.setText(WORDS.getString("USUARIO")); // NOI18N
         jRadioButtonUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonUsuarioActionPerformed(evt);
@@ -198,7 +200,7 @@ public class Consultas extends javax.swing.JPanel {
         });
 
         jRadioButtonLivro.setBackground(new java.awt.Color(255, 253, 238));
-        jRadioButtonLivro.setText("Livro");
+        jRadioButtonLivro.setText(WORDS.getString("LIVRO ")); // NOI18N
         jRadioButtonLivro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonLivroActionPerformed(evt);
@@ -207,7 +209,7 @@ public class Consultas extends javax.swing.JPanel {
 
         jRadioButtonNome.setBackground(new java.awt.Color(255, 253, 238));
         jRadioButtonNome.setSelected(true);
-        jRadioButtonNome.setText("Nome");
+        jRadioButtonNome.setText(WORDS.getString("NOME")); // NOI18N
         jRadioButtonNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonNomeActionPerformed(evt);
@@ -215,14 +217,14 @@ public class Consultas extends javax.swing.JPanel {
         });
 
         jRadioButtonCodigo.setBackground(new java.awt.Color(255, 253, 238));
-        jRadioButtonCodigo.setText("Código");
+        jRadioButtonCodigo.setText(WORDS.getString("CODIGO")); // NOI18N
         jRadioButtonCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButtonCodigoActionPerformed(evt);
             }
         });
 
-        jButtonVoltar.setText("Voltar");
+        jButtonVoltar.setText(WORDS.getString("VOLTAR")); // NOI18N
         jButtonVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonVoltarActionPerformed(evt);
@@ -298,7 +300,7 @@ public class Consultas extends javax.swing.JPanel {
         // TODO add your handling code here:
         jLabelErro.setText("");
         if (jTextFieldCod.getText() == null /*|| jTextFieldCod.getText().equals("")*/) {
-            jLabelErro.setErrorText("O Código deve ser infomado!");
+            jLabelErro.setErrorText(WORDS.getString("ERRO-CODIGO"));
         } else if (jRadioButtonUsuario.isSelected()) {
             try {
                 Object table[][];
@@ -315,12 +317,12 @@ public class Consultas extends javax.swing.JPanel {
                         model.addRow(table1);
                     }
                 } else {
-                    jLabelErro.setErrorText("Não foram encontrado resultados!");
+                    jLabelErro.setErrorText(WORDS.getString("ERRO-NAO-ENCONTRADO"));
                 }
             } catch (SQLException ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             } catch (NumberFormatException e) {
-                jLabelErro.setErrorText("Deve ser informado um número inteiro!");
+                jLabelErro.setErrorText(WORDS.getString("ERRO-NUMERO"));
             }
         } else if (jRadioButtonLivro.isSelected()) {
             try {
@@ -338,15 +340,13 @@ public class Consultas extends javax.swing.JPanel {
                         model.addRow(table1);
                     }
                 } else {
-                    jLabelErro.setErrorText("Não foram encontrado resultados!");
+                    jLabelErro.setErrorText(WORDS.getString("ERRO-NAO-ENCONTRADO"));
                 }
             } catch (SQLException ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             } catch (NumberFormatException e) {
-                jLabelErro.setErrorText("Deve ser informado um número inteiro!");
+                jLabelErro.setErrorText(WORDS.getString("ERRO-NUMERO"));
             }
-        } else {
-            jLabelErro.setSuccessText("Livro " + jTextFieldCod.getText() + " adicionado com sucesso!");
         }
     }//GEN-LAST:event_jButtonBuscaActionPerformed
 
@@ -434,12 +434,12 @@ public class Consultas extends javax.swing.JPanel {
         JButton novo, conservado, gasto, perdido, danificado, erro;
 
         public JEstadoCellRenderer() {
-            novo = new JButton("Novo");
-            conservado = new JButton("Bem conservado");
-            gasto = new JButton("Pouco desgastados");
-            perdido = new JButton("Perdido");
-            danificado = new JButton("Danificado");
-            erro = new JButton("Erro");
+            novo = new JButton(WORDS.getString("NOVO"));
+            conservado = new JButton(WORDS.getString("CONSERVADO"));
+            gasto = new JButton(WORDS.getString("DESGASTADO"));
+            perdido = new JButton(WORDS.getString("PERDIDO"));
+            danificado = new JButton(WORDS.getString("DANIFICADO"));
+            erro = new JButton(WORDS.getString("ERRO"));
         }
 
         @Override
@@ -534,7 +534,7 @@ public class Consultas extends javax.swing.JPanel {
                 } //senha
                 else if (jTableUsuario.getSelectedColumn() == 2) {
                     JPasswordField pwd = new JPasswordField(10);
-                    int action = JOptionPane.showConfirmDialog(null, pwd, "Informe a nova senha", JOptionPane.OK_CANCEL_OPTION);
+                    int action = JOptionPane.showConfirmDialog(null, pwd, WORDS.getString("NOVA-SENHA"), JOptionPane.OK_CANCEL_OPTION);
                     if (action == JOptionPane.OK_OPTION && pwd.getPassword().length >= 4) {
                         pwdTemp = pwd.getPassword();
                     } else {

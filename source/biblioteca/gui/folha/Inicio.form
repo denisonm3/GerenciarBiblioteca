@@ -56,7 +56,9 @@
           <Font name="Times New Roman" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Inicio"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="INICIO" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -64,7 +66,9 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;Programa de gerenciamento de biblioteca, desenvolvido por Denison Menezes.&lt;br&gt;&lt;br&gt; Este programa foi desenvolvido como forma de aprendizado da utiliza&#xe7;&#xe3;o do banco de dados Apache Derby em aplica&#xe7;&#xe3;o para desktop.&lt;br&gt;&lt;br&gt; Seleciona uma das fun&#xe7;&#xf5;es dispon&#xed;veis no sum&#xe1;rio a esquerda."/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="TEXTO-APRESENTACAO" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
         <Property name="verticalAlignment" type="int" value="1"/>
       </Properties>
     </Component>

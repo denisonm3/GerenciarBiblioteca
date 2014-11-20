@@ -20,6 +20,7 @@
  */
 package biblioteca.gui.folha;
 
+import static biblioteca.Biblioteca.WORDS;
 import biblioteca.gui.JFramePrincipal;
 import java.awt.Graphics;
 
@@ -58,10 +59,10 @@ public class Inicio extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Inicio");
+        jLabel1.setText(WORDS.getString("INICIO")); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
-        jLabel2.setText("<html>Programa de gerenciamento de biblioteca, desenvolvido por Denison Menezes.<br><br> Este programa foi desenvolvido como forma de aprendizado da utilização do banco de dados Apache Derby em aplicação para desktop.<br><br> Seleciona uma das funções disponíveis no sumário a esquerda.");
+        jLabel2.setText(WORDS.getString("TEXTO-APRESENTACAO")); // NOI18N
         jLabel2.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

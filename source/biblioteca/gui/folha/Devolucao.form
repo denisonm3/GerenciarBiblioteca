@@ -107,12 +107,16 @@
           <Font name="Times New Roman" size="18" style="1"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Devolu&#xe7;&#xe3;o"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="DEVOLUCAO" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonValidar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Validar Usu&#xe1;rio"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="VALIDAR-USUARIO" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonValidarActionPerformed"/>
@@ -188,7 +192,9 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Senha:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="SENHA" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="jTextFieldSenha">
@@ -198,14 +204,18 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="14" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="CODIGO" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldNome">
     </Component>
     <Component class="javax.swing.JButton" name="jButtonVoltar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Voltar"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="VOLTAR" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVoltarActionPerformed"/>
@@ -213,7 +223,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonPendente">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Pendente"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="PENDENTE" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPendenteActionPerformed"/>
@@ -221,7 +233,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonDevolver">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Devolver"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="DEVOLVER" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonDevolverActionPerformed"/>
@@ -230,7 +244,9 @@
     <Component class="javax.swing.JLabel" name="jLabelUsuario">
       <Properties>
         <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="biblioteca/idioma/Idioma_pt_BR.properties" key="USUARIO" replaceFormat="WORDS.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelUserName">

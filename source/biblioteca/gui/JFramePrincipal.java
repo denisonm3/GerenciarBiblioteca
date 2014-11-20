@@ -20,6 +20,7 @@
  */
 package biblioteca.gui;
 
+import static biblioteca.Biblioteca.WORDS;
 import biblioteca.db.ControleBanco;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -30,7 +31,7 @@ import java.awt.Toolkit;
  */
 public class JFramePrincipal extends javax.swing.JFrame {
     
-    public static final Image FOLHA_DIREITA = Toolkit.getDefaultToolkit().getImage( JFramePrincipal.class .getResource("imagens/folha_direita.jpg"));
+    public static final Image FOLHA_DIREITA = Toolkit.getDefaultToolkit().getImage( JFramePrincipal.class .getResource("imagens/folha_direita.jpg")); //NOI18N
     private final ControleBanco banco;
     
     /** Creates new form JFramePrincipal */
@@ -94,10 +95,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         jLabelSumario.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabelSumario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelSumario.setText("Sumário");
+        jLabelSumario.setText(WORDS.getString("SUMARIO")); // NOI18N
 
         jLabelInicio.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelInicio.setText("1 - Inicio .................... 1");
+        jLabelInicio.setText(WORDS.getString("SUMARIO-INICIO")); // NOI18N
         jLabelInicio.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelInicioMouseClicked(evt);
@@ -105,7 +106,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelCad.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelCad.setText("2 - Cadastros ................. 2");
+        jLabelCad.setText(WORDS.getString("SUMARIO-CADASTRO")); // NOI18N
         jLabelCad.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelCadMouseClicked(evt);
@@ -113,7 +114,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelCadUsuario.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        jLabelCadUsuario.setText("  2.1 - Usuário ............... 2");
+        jLabelCadUsuario.setText(WORDS.getString("SUMARIO-USUARIO")); // NOI18N
         jLabelCadUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelCadUsuarioMouseClicked(evt);
@@ -121,7 +122,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelCadLivro.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        jLabelCadLivro.setText("  2.2 - Livro ................. 3");
+        jLabelCadLivro.setText(WORDS.getString("SUMARIO-LIVRO")); // NOI18N
         jLabelCadLivro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelCadLivroMouseClicked(evt);
@@ -129,7 +130,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelConsultas.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelConsultas.setText("3 - Consultas ................. 4");
+        jLabelConsultas.setText(WORDS.getString("SUMARIO-CONSULTA")); // NOI18N
         jLabelConsultas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelConsultasMouseClicked(evt);
@@ -137,7 +138,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelEmprestimo.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelEmprestimo.setText("4 - Emprestimo ................ 6");
+        jLabelEmprestimo.setText(WORDS.getString("SUMARIO-EMPRESTIMO")); // NOI18N
         jLabelEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelEmprestimoMouseClicked(evt);
@@ -145,7 +146,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelDevolucao.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelDevolucao.setText("5 - Devolução ................. 7");
+        jLabelDevolucao.setText(WORDS.getString("SUMARIO-DEVOLUCAO")); // NOI18N
         jLabelDevolucao.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelDevolucaoMouseClicked(evt);
@@ -153,7 +154,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelSair.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
-        jLabelSair.setText("6 - Sair ...................... 8");
+        jLabelSair.setText(WORDS.getString("SUMARIO-SAIR")); // NOI18N
         jLabelSair.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelSairMouseClicked(evt);
@@ -161,7 +162,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelConsultaLU.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        jLabelConsultaLU.setText("  3.1 - Livros e Usuários ..... 4");
+        jLabelConsultaLU.setText(WORDS.getString("SUMARIO-CONSULTA-L-U")); // NOI18N
         jLabelConsultaLU.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelConsultaLUMouseClicked(evt);
@@ -169,7 +170,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
 
         jLabelHistorico.setFont(new java.awt.Font("Courier New", 0, 14)); // NOI18N
-        jLabelHistorico.setText("  3.2 - Histórico ............. 5");
+        jLabelHistorico.setText(WORDS.getString("SUMARIO-HISTORICO")); // NOI18N
         jLabelHistorico.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelHistoricoMouseClicked(evt);
@@ -184,17 +185,16 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addGroup(sumarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabelSair, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                    .addGroup(sumarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jLabelDevolucao, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                        .addComponent(jLabelEmprestimo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelHistorico, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelConsultaLU, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelConsultas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelCadLivro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelCadUsuario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelCad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabelSumario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabelDevolucao, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(jLabelEmprestimo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelHistorico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelConsultaLU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCadLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCadUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelCad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabelSumario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         sumarioLayout.setVerticalGroup(
