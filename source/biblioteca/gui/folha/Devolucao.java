@@ -17,7 +17,6 @@ package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -233,13 +232,13 @@ public class Devolucao extends javax.swing.JPanel {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 if (table.length > 0) {
                     model.setNumRows(0);
-                    for (int i = 0; i < table.length; i++) {
-                        if ((Integer) table[i][3] == 0) {
-                            table[i][3] = "Aberto";
-                        } else if ((Integer) table[i][3] == 1) {
-                            table[i][3] = "Pendente";
+                    for (Object[] table1 : table) {
+                        if ((Integer) table1[3] == 0) {
+                            table1[3] = "Aberto";
+                        } else if ((Integer) table1[3] == 1) {
+                            table1[3] = "Pendente";
                         }
-                        model.addRow(table[i]);
+                        model.addRow(table1);
                     }
                     jLabelErro.setText("");
                     inserirUsuario(false);
@@ -263,19 +262,16 @@ public class Devolucao extends javax.swing.JPanel {
             Integer cod = (Integer) jTable1.getValueAt(linha, 0);
             try {
                 banco.setEmprestimoDevolver(cod, 2, new Date(System.currentTimeMillis()));
-                jLabelErro.setForeground(Color.GREEN);
-                jLabelErro.setText("Devolução efetuada com sucesso.");
+                jLabelErro.setSuccessText("Devolução efetuada com sucesso.");
             } catch (SQLException ex) {
-                jLabelErro.setForeground(Color.RED);
-                jLabelErro.setText(ex.getMessage());
+                jLabelErro.setErrorText(ex.getMessage());
             }
             ((DefaultTableModel) jTable1.getModel()).removeRow(linha);
             if(jTable1.getModel().getRowCount() == 0) {
                 inserirUsuario(true);
             }
         } else {
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("Selecione uma linha!");
+            jLabelErro.setErrorText("Selecione uma linha!");
         }
     }//GEN-LAST:event_jButtonDevolverActionPerformed
 
@@ -286,15 +282,12 @@ public class Devolucao extends javax.swing.JPanel {
             try {
                 banco.setEmprestimoDevolver(cod, 1, new Date(System.currentTimeMillis()));
                 jTable1.setValueAt("Pendente", linha, 3);
-                jLabelErro.setForeground(Color.GREEN);
-                jLabelErro.setText("Devolução marcada com pendência.");
+                jLabelErro.setSuccessText("Devolução marcada com pendência.");
             } catch (SQLException ex) {
-                jLabelErro.setForeground(Color.RED);
-                jLabelErro.setText(ex.getMessage());
+                jLabelErro.setErrorText(ex.getMessage());
             }
         } else {
-            jLabelErro.setForeground(Color.RED);
-            jLabelErro.setText("Selecione uma linha!");
+            jLabelErro.setErrorText("Selecione uma linha!");
         }
     }//GEN-LAST:event_jButtonPendenteActionPerformed
 

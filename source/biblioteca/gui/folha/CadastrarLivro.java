@@ -22,7 +22,6 @@ package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.sql.SQLException;
 
@@ -176,8 +175,7 @@ public class CadastrarLivro extends javax.swing.JPanel {
                     banco.addLivro(jTextFieldCod.getText(), jTextFieldNome.getText(), null, jComboBoxEstado.getSelectedIndex() + 1);
                 else
                     banco.addLivro(jTextFieldCod.getText(), jTextFieldNome.getText(), jTextFieldEditora.getText(), jComboBoxEstado.getSelectedIndex() + 1);
-                jLabelErro.setForeground(Color.GREEN);
-                jLabelErro.setText("Livro "+jTextFieldNome.getText()+" adicionado com sucesso!");
+                jLabelErro.setSuccessText("Livro "+jTextFieldNome.getText()+" adicionado com sucesso!");
             } catch (SQLException ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             }

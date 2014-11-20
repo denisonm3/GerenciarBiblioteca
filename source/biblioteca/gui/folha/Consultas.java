@@ -22,7 +22,6 @@ package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.sql.SQLException;
@@ -335,8 +334,8 @@ public class Consultas extends javax.swing.JPanel {
                 if (table.length > 0) {
                     apresentarBusca(true);
                     model.setNumRows(0);
-                    for (int i = 0; i < table.length; i++) {
-                        model.addRow(table[i]);
+                    for (Object[] table1 : table) {
+                        model.addRow(table1);
                     }
                 } else {
                     jLabelErro.setErrorText("Não foram encontrado resultados!");
@@ -347,8 +346,7 @@ public class Consultas extends javax.swing.JPanel {
                 jLabelErro.setErrorText("Deve ser informado um número inteiro!");
             }
         } else {
-            jLabelErro.setForeground(Color.GREEN);
-            jLabelErro.setText("Livro " + jTextFieldCod.getText() + " adicionado com sucesso!");
+            jLabelErro.setSuccessText("Livro " + jTextFieldCod.getText() + " adicionado com sucesso!");
         }
     }//GEN-LAST:event_jButtonBuscaActionPerformed
 

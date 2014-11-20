@@ -22,7 +22,6 @@ package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.sql.SQLException;
 
@@ -157,8 +156,7 @@ public class CadastrarUsuario extends javax.swing.JPanel {
         }else{
             try {
                 banco.addUsuario(jTextFieldCod.getText(), jTextFieldNome.getText(), jTextFieldSenha.getPassword());
-                jLabelErro.setForeground(Color.GREEN);
-                jLabelErro.setText("Usuario "+jTextFieldNome.getText()+" adicionado com sucesso!");
+                jLabelErro.setSuccessText("Usuario "+jTextFieldNome.getText()+" adicionado com sucesso!");
             } catch (SQLException ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             }

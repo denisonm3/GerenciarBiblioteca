@@ -17,7 +17,6 @@ package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
 import biblioteca.gui.JFramePrincipal;
-import java.awt.Color;
 import java.awt.Graphics;
 import java.sql.Date;
 
@@ -189,8 +188,7 @@ public class Emprestimo extends javax.swing.JPanel {
                 userName = banco.validarUsuario(userCod, jTextFieldSenha.getPassword());
                 int abertos = banco.getEmprestimoAberto(userCod).length;
                 if(abertos > 0) {
-                    jLabelErro.setForeground(Color.ORANGE);
-                    jLabelErro.setText("Usuário está com "+abertos+" livros.");
+                    jLabelErro.setWarningText("Usuário está com "+abertos+" livros.");
                 } else {
                     jLabelErro.setText("");
                 }
@@ -214,8 +212,7 @@ public class Emprestimo extends javax.swing.JPanel {
                 livroCod = Integer.valueOf(jTextFieldCodLivro.getText());
                 banco.validarLivro(livroCod);
                 banco.addEmprestimo(userCod,livroCod,new Date(System.currentTimeMillis()));
-                jLabelErro.setForeground(Color.GREEN);
-                jLabelErro.setText("Emprestimo realizado com sucesso!");
+                jLabelErro.setSuccessText("Emprestimo realizado com sucesso!");
             } catch (Exception ex) {
                 jLabelErro.setErrorText(ex.getMessage());
             }
