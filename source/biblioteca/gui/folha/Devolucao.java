@@ -1,10 +1,22 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2014 Denison.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-package biblioteca;
+package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
+import biblioteca.gui.JFramePrincipal;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.sql.Date;
@@ -12,8 +24,8 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author denison
+ * Interface gráfica para finalizar emprestimo de livro
+ * @author Denison
  */
 public class Devolucao extends javax.swing.JPanel {
 
@@ -60,7 +72,7 @@ public class Devolucao extends javax.swing.JPanel {
         jButtonDevolver = new javax.swing.JButton();
         jLabelUsuario = new javax.swing.JLabel();
         jLabelUserName = new javax.swing.JLabel();
-        jLabelErro = new biblioteca.JErroLabel();
+        jLabelErro = new biblioteca.gui.JErroLabel();
 
         setMaximumSize(new java.awt.Dimension(351, 535));
         setMinimumSize(new java.awt.Dimension(351, 535));
@@ -209,9 +221,9 @@ public class Devolucao extends javax.swing.JPanel {
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         if (jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")) {
-            jLabelErro.setErroText("O Código deve ser infomado!");
+            jLabelErro.setErrorText("O Código deve ser infomado!");
         } else if (jTextFieldSenha.getPassword().length < 4) {
-            jLabelErro.setErroText("Senha deve ter 4 ou mais caractes!");
+            jLabelErro.setErrorText("Senha deve ter 4 ou mais caractes!");
         } else {
             try {
                 Integer cod = Integer.valueOf(jTextFieldNome.getText());
@@ -232,10 +244,10 @@ public class Devolucao extends javax.swing.JPanel {
                     jLabelErro.setText("");
                     inserirUsuario(false);
                 } else {
-                    jLabelErro.setErroText("Sem emprestimos pendentes!");
+                    jLabelErro.setErrorText("Sem emprestimos pendentes!");
                 }
             } catch (Exception ex) {
-                jLabelErro.setErroText(ex.getMessage());
+                jLabelErro.setErrorText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
@@ -291,7 +303,7 @@ public class Devolucao extends javax.swing.JPanel {
     private javax.swing.JButton jButtonPendente;
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JButton jButtonVoltar;
-    private biblioteca.JErroLabel jLabelErro;
+    private biblioteca.gui.JErroLabel jLabelErro;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelTitulo;

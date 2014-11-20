@@ -37,7 +37,7 @@
  * 09-Set-2014 : Version 2.0;
  *
  */
-package biblioteca;
+package biblioteca.gui;
 
 import java.awt.AWTException;
 import java.awt.Color;

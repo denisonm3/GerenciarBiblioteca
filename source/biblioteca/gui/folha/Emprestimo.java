@@ -1,17 +1,29 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2014 Denison.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-package biblioteca;
+package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
+import biblioteca.gui.JFramePrincipal;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.sql.Date;
 
 /**
- *
- * @author denison
+ * Interface gráfica para realizar emprestimo de um livro
+ * @author Denison
  */
 public class Emprestimo extends javax.swing.JPanel {
 
@@ -58,7 +70,7 @@ public class Emprestimo extends javax.swing.JPanel {
         jButtonEmprestar = new javax.swing.JButton();
         jLabelUserName = new javax.swing.JLabel();
         jButtonVoltar = new javax.swing.JButton();
-        jLabelErro = new biblioteca.JErroLabel();
+        jLabelErro = new biblioteca.gui.JErroLabel();
 
         setMaximumSize(new java.awt.Dimension(351, 535));
         setMinimumSize(new java.awt.Dimension(351, 535));
@@ -168,9 +180,9 @@ public class Emprestimo extends javax.swing.JPanel {
 
     private void jButtonValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonValidarActionPerformed
         if(jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")){
-            jLabelErro.setErroText("O Nome deve ser infomado!");
+            jLabelErro.setErrorText("O Nome deve ser infomado!");
         }else if(jTextFieldSenha.getPassword().length < 4){
-            jLabelErro.setErroText("Senha deve ter 4 ou mais caractes!");
+            jLabelErro.setErrorText("Senha deve ter 4 ou mais caractes!");
         }else{
             try {
                 userCod = Integer.valueOf(jTextFieldNome.getText());
@@ -184,7 +196,7 @@ public class Emprestimo extends javax.swing.JPanel {
                 }
                 inserirLivro();
             } catch (Exception ex) {
-                jLabelErro.setErroText(ex.getMessage());
+                jLabelErro.setErrorText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonValidarActionPerformed
@@ -196,7 +208,7 @@ public class Emprestimo extends javax.swing.JPanel {
 
     private void jButtonEmprestarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEmprestarActionPerformed
         if(jTextFieldCodLivro.getText() == null || jTextFieldCodLivro.getText().equals("")){
-            jLabelErro.setErroText("O Código deve ser infomado!");
+            jLabelErro.setErrorText("O Código deve ser infomado!");
         }else{
             try {
                 livroCod = Integer.valueOf(jTextFieldCodLivro.getText());
@@ -205,7 +217,7 @@ public class Emprestimo extends javax.swing.JPanel {
                 jLabelErro.setForeground(Color.GREEN);
                 jLabelErro.setText("Emprestimo realizado com sucesso!");
             } catch (Exception ex) {
-                jLabelErro.setErroText(ex.getMessage());
+                jLabelErro.setErrorText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonEmprestarActionPerformed
@@ -215,7 +227,7 @@ public class Emprestimo extends javax.swing.JPanel {
     private javax.swing.JButton jButtonValidar;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabelCodLivro;
-    private biblioteca.JErroLabel jLabelErro;
+    private biblioteca.gui.JErroLabel jLabelErro;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelTitulo;

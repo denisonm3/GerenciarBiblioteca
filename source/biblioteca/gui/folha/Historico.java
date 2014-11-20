@@ -1,19 +1,30 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2014 Denison.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-package biblioteca;
+package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
-import java.awt.Color;
+import biblioteca.gui.JFramePrincipal;
 import java.awt.Graphics;
 import java.sql.SQLException;
 import javax.security.auth.login.AccountException;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author denison
+ * Interface de apresentação dos emprestimos realizados por um usuário
+ * @author Denison
  */
 public class Historico extends javax.swing.JPanel {
 
@@ -55,7 +66,7 @@ public class Historico extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabelUsuario = new javax.swing.JLabel();
         jLabelUserName = new javax.swing.JLabel();
-        jLabelErro = new biblioteca.JErroLabel();
+        jLabelErro = new biblioteca.gui.JErroLabel();
 
         setMaximumSize(new java.awt.Dimension(351, 535));
         setMinimumSize(new java.awt.Dimension(351, 535));
@@ -166,7 +177,7 @@ public class Historico extends javax.swing.JPanel {
 
     private void jButtonBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscaActionPerformed
         if (jTextFieldCod.getText() == null || jTextFieldCod.getText().equals("")) {
-            jLabelErro.setErroText("O Código deve ser infomado!");
+            jLabelErro.setErrorText("O Código deve ser infomado!");
         } else {
             try {
                 Integer userCod = Integer.parseInt(jTextFieldCod.getText());
@@ -194,7 +205,7 @@ public class Historico extends javax.swing.JPanel {
                 jLabelErro.setText("");
                 apresentarBusca(false);
             } catch (NumberFormatException | SQLException | AccountException ex) {
-                jLabelErro.setErroText(ex.getMessage());
+                jLabelErro.setErrorText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonBuscaActionPerformed
@@ -207,7 +218,7 @@ public class Historico extends javax.swing.JPanel {
     private javax.swing.JButton jButtonBusca;
     private javax.swing.JButton jButtonVoltar;
     private javax.swing.JLabel jLabelCodigo;
-    private biblioteca.JErroLabel jLabelErro;
+    private biblioteca.gui.JErroLabel jLabelErro;
     private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JLabel jLabelUserName;
     private javax.swing.JLabel jLabelUsuario;

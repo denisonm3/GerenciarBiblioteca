@@ -1,23 +1,34 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * Inicio.java
+ * Copyright 2014 Denison.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * ============================================================================
+ * CadastrarUsuario.java
  *
  * Created on 18/07/2012, 17:12:38
  */
-package biblioteca;
+package biblioteca.gui.folha;
 
 import biblioteca.db.ControleBanco;
+import biblioteca.gui.JFramePrincipal;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.sql.SQLException;
 
 /**
- *
- * @author denison_usuario
+ * Interface para adição de usuário no banco de dados
+ * @author Denison
  */
 public class CadastrarUsuario extends javax.swing.JPanel {
     
@@ -55,7 +66,7 @@ public class CadastrarUsuario extends javax.swing.JPanel {
         jButtonAddUsuario = new javax.swing.JButton();
         jLabelSenha = new javax.swing.JLabel();
         jTextFieldSenha = new javax.swing.JPasswordField();
-        jLabelErro = new biblioteca.JErroLabel();
+        jLabelErro = new biblioteca.gui.JErroLabel();
 
         setMaximumSize(new java.awt.Dimension(351, 535));
         setMinimumSize(new java.awt.Dimension(351, 535));
@@ -73,7 +84,7 @@ public class CadastrarUsuario extends javax.swing.JPanel {
 
         jTextFieldCod.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
-        jButtonAddUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/imagens/novo_usuario.png"))); // NOI18N
+        jButtonAddUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/biblioteca/gui/imagens/novo_usuario.png"))); // NOI18N
         jButtonAddUsuario.setText("Adicionar Usuário");
         jButtonAddUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,20 +147,20 @@ public class CadastrarUsuario extends javax.swing.JPanel {
     private void jButtonAddUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddUsuarioActionPerformed
         // TODO add your handling code here:
         if(jTextFieldCod.getText() == null || jTextFieldCod.getText().equals("")){
-            jLabelErro.setErroText("O Código deve ser infomado!");
+            jLabelErro.setErrorText("O Código deve ser infomado!");
         }else if(jTextFieldNome.getText() == null || jTextFieldNome.getText().equals("")){
-            jLabelErro.setErroText("O Nome deve ser infomado!");
+            jLabelErro.setErrorText("O Nome deve ser infomado!");
         }else if(jTextFieldCod.getText().contains("-")){
-            jLabelErro.setErroText("O Código deve ser positivo!");
+            jLabelErro.setErrorText("O Código deve ser positivo!");
         }else if(jTextFieldSenha.getPassword().length < 4){
-            jLabelErro.setErroText("Senha deve ter 4 ou mais caractes!");
+            jLabelErro.setErrorText("Senha deve ter 4 ou mais caractes!");
         }else{
             try {
                 banco.addUsuario(jTextFieldCod.getText(), jTextFieldNome.getText(), jTextFieldSenha.getPassword());
                 jLabelErro.setForeground(Color.GREEN);
                 jLabelErro.setText("Usuario "+jTextFieldNome.getText()+" adicionado com sucesso!");
             } catch (SQLException ex) {
-                jLabelErro.setErroText(ex.getMessage());
+                jLabelErro.setErrorText(ex.getMessage());
             }
         }
     }//GEN-LAST:event_jButtonAddUsuarioActionPerformed
@@ -157,7 +168,7 @@ public class CadastrarUsuario extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddUsuario;
     private javax.swing.JLabel jLabelCodigo;
-    private biblioteca.JErroLabel jLabelErro;
+    private biblioteca.gui.JErroLabel jLabelErro;
     private javax.swing.JLabel jLabelNome;
     private javax.swing.JLabel jLabelSenha;
     private javax.swing.JLabel jLabelTitulo;

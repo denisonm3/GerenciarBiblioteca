@@ -173,7 +173,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonVoltarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="biblioteca.JErroLabel" name="jLabelErro">
+    <Component class="biblioteca.gui.JErroLabel" name="jLabelErro">
     </Component>
   </SubComponents>
 </Form>

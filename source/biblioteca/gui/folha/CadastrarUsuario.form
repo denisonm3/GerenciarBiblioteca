@@ -120,7 +120,7 @@
     <Component class="javax.swing.JButton" name="jButtonAddUsuario">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/biblioteca/imagens/novo_usuario.png"/>
+          <Image iconType="3" name="/biblioteca/gui/imagens/novo_usuario.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Adicionar Usu&#xe1;rio"/>
       </Properties>
@@ -138,7 +138,7 @@
     </Component>
     <Component class="javax.swing.JPasswordField" name="jTextFieldSenha">
     </Component>
-    <Component class="biblioteca.JErroLabel" name="jLabelErro">
+    <Component class="biblioteca.gui.JErroLabel" name="jLabelErro">
     </Component>
   </SubComponents>
 </Form>

@@ -1,22 +1,32 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
+ * Copyright 2014 Denison.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * ============================================================================
  * JFramePrincipal.java
  *
- * Created on 11/07/2012, 12:28:34
+ * Created on 11/07/2012
  */
-package biblioteca;
+package biblioteca.gui;
 
 import biblioteca.db.ControleBanco;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 /**
- *
- * @author denison_usuario
+ * Janela principal da aplicação
+ * @author Denison
  */
 public class JFramePrincipal extends javax.swing.JFrame {
     
@@ -38,13 +48,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cadastrarUsuario = new biblioteca.CadastrarUsuario();
-        consultas = new biblioteca.Consultas();
-        devolucao = new biblioteca.Devolucao();
-        emprestimo = new biblioteca.Emprestimo();
-        historico = new biblioteca.Historico();
-        cadastrarLivro = new biblioteca.CadastrarLivro();
-        sumario = new biblioteca.Sumario();
+        cadastrarUsuario = new biblioteca.gui.folha.CadastrarUsuario();
+        consultas = new biblioteca.gui.folha.Consultas();
+        devolucao = new biblioteca.gui.folha.Devolucao();
+        emprestimo = new biblioteca.gui.folha.Emprestimo();
+        historico = new biblioteca.gui.folha.Historico();
+        cadastrarLivro = new biblioteca.gui.folha.CadastrarLivro();
+        sumario = new biblioteca.gui.Sumario();
         jLabelSumario = new javax.swing.JLabel();
         jLabelInicio = new javax.swing.JLabel();
         jLabelCad = new javax.swing.JLabel();
@@ -57,7 +67,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jLabelConsultaLU = new javax.swing.JLabel();
         jLabelHistorico = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        inicio = new biblioteca.Inicio();
+        inicio = new biblioteca.gui.folha.Inicio();
 
         cadastrarUsuario.setBanco(banco);
 
@@ -279,13 +289,13 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabelHistoricoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private biblioteca.CadastrarLivro cadastrarLivro;
-    private biblioteca.CadastrarUsuario cadastrarUsuario;
-    private biblioteca.Consultas consultas;
-    private biblioteca.Devolucao devolucao;
-    private biblioteca.Emprestimo emprestimo;
-    private biblioteca.Historico historico;
-    private biblioteca.Inicio inicio;
+    private biblioteca.gui.folha.CadastrarLivro cadastrarLivro;
+    private biblioteca.gui.folha.CadastrarUsuario cadastrarUsuario;
+    private biblioteca.gui.folha.Consultas consultas;
+    private biblioteca.gui.folha.Devolucao devolucao;
+    private biblioteca.gui.folha.Emprestimo emprestimo;
+    private biblioteca.gui.folha.Historico historico;
+    private biblioteca.gui.folha.Inicio inicio;
     private javax.swing.JLabel jLabelCad;
     private javax.swing.JLabel jLabelCadLivro;
     private javax.swing.JLabel jLabelCadUsuario;
@@ -298,6 +308,6 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSair;
     private javax.swing.JLabel jLabelSumario;
     private javax.swing.JScrollPane jScrollPane1;
-    private biblioteca.Sumario sumario;
+    private biblioteca.gui.Sumario sumario;
     // End of variables declaration//GEN-END:variables
 }

@@ -235,7 +235,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelUserName">
     </Component>
-    <Component class="biblioteca.JErroLabel" name="jLabelErro">
+    <Component class="biblioteca.gui.JErroLabel" name="jLabelErro">
     </Component>
   </SubComponents>
 </Form>
